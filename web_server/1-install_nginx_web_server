@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
-# Installs nginx server
-
+# Installing Nginx on Ubuntu
+# Make sure the package list is up to date
 sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo echo "Holberton School " > /var/www/html/index.html
-sudo service nginx start
+# Upgrade any out-of-date packages (optional)
+sudo apt-get upgrade -y
+# Install Nginx
+sudo apt-get install -y nginx
+
+# Ensure the default directory for Nginx exists (it should exist by default)
+# Create the HTML directory if it doesn't exist
+sudo mkdir -p /var/www/html
+
+# Create and write the required message into the index.html file
+echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
+
+# Restart Nginx without using systemctl
+sudo service nginx restart

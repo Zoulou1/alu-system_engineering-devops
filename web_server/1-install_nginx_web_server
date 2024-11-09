@@ -1,19 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script installs Nginx on an Ubuntu server, configures it to listen on port 80, and sets the default page to display "Holberton School."
 
-# Update the package list
+# Update the package list to ensure all packages are up-to-date
 sudo apt-get update -y
 
-# Install nginx and automatically answer "yes" to any prompts
+# Install Nginx and confirm the installation automatically
 sudo apt-get install nginx -y
 
-# Ensure nginx is listening on port 80 (default setting)
+# Configure Nginx to listen on port 80 (default setting)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
 
-# Update the default Nginx welcome page to display "Holberton School"
-echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
+# Modify the default Nginx page to display "Holberton School"
+echo "Holberton School" | sudo tee /var/www/html/index.html
 
-# Restart Nginx service using the init.d script
+# Restart Nginx service using init.d (without using systemctl)
 sudo /etc/init.d/nginx restart
 
-# Confirm Nginx setup
-echo "Nginx installed and configured to display 'Holberton School for the win!' on the default page."
+# Check if Nginx is properly installed and running by querying the root page
+curl -s -o /dev/null -w "%{http_code}" http://localhost | grep -q "200" && echo "Nginx installed and configured successfully."

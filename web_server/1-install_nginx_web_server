@@ -1,20 +1,37 @@
 #!/usr/bin/env bash
 # This script installs Nginx on an Ubuntu server, configures it to listen on port 80, and sets the default page to display "Holberton School."
 
-# Update the package list to ensure all packages are up-to-date
+# Update package list
 sudo apt-get update -y
 
-# Install Nginx and confirm the installation automatically
+# Install Nginx
 sudo apt-get install nginx -y
 
-# Configure Nginx to listen on port 80 (default setting)
+# Ensure Nginx is set to listen on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
 
-# Modify the default Nginx page to display "Holberton School"
+# Replace the default Nginx page content with "Holberton School"
 echo "Holberton School" | sudo tee /var/www/html/index.html
 
-# Restart Nginx service using init.d (without using systemctl)
+# Restart Nginx using init.d script to apply changes
 sudo /etc/init.d/nginx restart
 
-# Check if Nginx is properly installed and running by querying the root page
-curl -s -o /dev/null -w "%{http_code}" http://localhost | grep -q "200" && echo "Nginx installed and configured successfully."
+# Verification steps
+# Check if Nginx is active and listening on port 80
+if sudo lsof -i :80 | grep nginx; then
+    echo "Nginx is installed and listening on port 80."
+else
+    echo "Failed: Nginx is not listening on port 80."
+    exit 1
+fi
+
+# Check if the page at / contains "Holberton School"
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost)
+CONTENT=$(curl -s http://localhost)
+
+if [[ "$RESPONSE" -eq 200 && "$CONTENT" == *"Holberton School"* ]]; then
+    echo "Nginx is serving a page with 'Holberton School' at the root URL."
+else
+    echo "Failed: Nginx did not return the expected content or status code."
+    exit 1
+fi

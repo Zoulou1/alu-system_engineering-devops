@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and Background */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+      color: #f3f3f3;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Floating Shapes Background Animation */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('path-to-floating-shapes.png') no-repeat center center/cover;
+      opacity: 0.1;
+      animation: floatShapes 10s infinite linear;
+      z-index: -1;
+    }
+
+    @keyframes floatShapes {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+
+    /* Error Container */
+    .error-container {
+      text-align: center;
+      max-width: 500px;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Title and Text */
+    .error-title {
+      font-size: 8rem;
+      font-weight: 700;
+      color: #ff5e5e;
+      text-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .error-message {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+
+    .subtext {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Button and Search */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      color: #fff;
+      background: #ff5e5e;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 94, 94, 0.4);
+    }
+
+    .btn:hover {
+      background: #ff7878;
+      box-shadow: 0 5px 15px rgba(255, 120, 120, 0.6);
+    }
+
+    .search-bar {
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .search-bar::placeholder {
+      color: #ddd;
+    }
+
+    /* Animated Character */
+    .character {
+      margin-top: 20px;
+      width: 200px;
+      height: 200px;
+      background: url('path-to-animated-character.svg') no-repeat center center/contain;
+      animation: characterLookAround 5s infinite alternate;
+    }
+
+    @keyframes characterLookAround {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(10deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <h1 class="error-title">404</h1>
+    <p class="error-message">Oops! We’re sorry, but this page doesn’t exist.</p>
+    <p class="subtext">Ceci n'est pas une page</p>
+    <div class="buttons">
+      <a href="/" class="btn">Return Home</a>
+      <input type="text" placeholder="Search..." class="search-bar" aria-label="Search">
+    </div>
+    <div class="character">
+      <!-- SVG or animated character illustration goes here -->
+    </div>
+  </div>
+</body>
+</html>

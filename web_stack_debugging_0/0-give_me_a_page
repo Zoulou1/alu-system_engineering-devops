@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# Start Apache so as to return a
-# page containing Hello Holberton
+
+# Create an HTML file to serve
+echo "Hello Holberton" > /var/www/html/index.html
+
+# Start Apache service
 service apache2 start
+
+# Keep the container running
+tail -f /dev/null

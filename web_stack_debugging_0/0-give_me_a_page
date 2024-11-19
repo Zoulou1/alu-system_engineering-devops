@@ -6,5 +6,12 @@ echo "Hello Holberton" > /var/www/html/index.html
 # Start Apache service
 service apache2 start
 
+# Check if Apache is running and output the message
+if pgrep apache2 > /dev/null; then
+    echo "apache2 is running"
+else
+    echo "Failed to start apache2"
+fi
+
 # Keep the container running
 tail -f /dev/null

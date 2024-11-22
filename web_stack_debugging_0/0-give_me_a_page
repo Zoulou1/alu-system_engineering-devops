@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
+# configure my apache file so that when querying the root to return Holberton school
 
-# Create an HTML file to serve
-echo "Hello Holberton" > /var/www/html/index.html
-
-# Start Apache service
-service apache2 start
-
-# Check if Apache is running and output the message
-if pgrep apache2 > /dev/null; then
-    echo "apache2 is running"
-else
-    echo "Failed to start apache2"
-fi
-
-# Keep the container running
-tail -f /dev/null
+sudo apt-get update
+sudo apt-get install apache2
+sudo /etc/init.d/apache2 start
+echo "Hello Holberton" | sudo tee /var/www/html/index.html
+sudo service apache2 restart

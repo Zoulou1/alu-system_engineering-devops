@@ -1,23 +1,8 @@
-echo -e "Updating packages...\n"
+#!/usr/bin/env bash
+# configure my apache file so that when querying the root to return Holberton school
 
-# Update package list
 sudo apt-get update
-
-echo -e "Installing UFW...\n"
-
-sudo apt-get install -y ufw
-
-echo -e "Configuring UFW...\n"
-
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-
-# Allow specific ports
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
-
-# Enable UFW
-sudo ufw enable
-
-echo -e "Process Completed.\n"
+sudo apt-get install apache2
+sudo /etc/init.d/apache2 start
+echo "Hello Holberton" | sudo tee /var/www/html/index.html
+sudo service apache2 restart
